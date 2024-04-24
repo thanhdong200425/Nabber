@@ -63,12 +63,12 @@ const changeAppearance = function ({ route }) {
             height: 96,
         },
         tabBarActiveTintColor: "#E55733",
+        headerShown: false,
     };
 };
 
 const styles = StyleSheet.create({
     circleContainer: {
-        borderWidth: 1,
         borderRadius: 30,
         width: 60,
         height: 60,

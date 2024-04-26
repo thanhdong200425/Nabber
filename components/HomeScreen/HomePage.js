@@ -10,7 +10,7 @@ export default function HomePage() {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
-            <Header uri={logo} />
+            <Header uri={logo} iconName={"mail-unread-outline"} />
             <SubHeader content="Explore Feeds" />
             <ContainerPosts />
         </SafeAreaView>

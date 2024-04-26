@@ -10,7 +10,7 @@ export default function Header(props) {
             </View>
 
             <View>
-                <Ionicons name="mail-unread-outline" style={styles.textDisplay} />
+                <Ionicons name={props.iconName} style={styles.textDisplay} />
             </View>
         </View>
     );

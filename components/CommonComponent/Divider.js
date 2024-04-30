@@ -1,13 +1,8 @@
 import { StyleSheet, View } from "react-native";
 
 export default function Divider(props) {
-    return <View style={[styles.divider, { borderLeftWidth: props.width, height: props.height }]} />;
+    return <View style={{...styles.divider, width: props.width, height: props.height, borderLeftWidth: props.borderLeftWidth, borderTopWidth: props.borderTopWidth, borderColor: props.borderColor}} />;
 }
-
-Divider.defaultProps = {
-    width: 1,
-    height: "100%",
-};
 
 const styles = StyleSheet.create({
     divider: {

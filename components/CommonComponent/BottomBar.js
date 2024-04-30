@@ -8,7 +8,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import HomePage from "../HomeScreen/HomePage";
 import SearchPage from "../SearchScreen/SearchPage";
 import AddStoryPage from "../AddStoryScreen/AddStoryPage";
-import NotifyPage from "../NotifyScreen/NotifyPage";
+import NotifyPage from "../NotifyScreen/NotifyPage.js";
 import ProfilePage from "../ProfileScreen/ProfilePage";
 import { StyleSheet, View } from "react-native";
 

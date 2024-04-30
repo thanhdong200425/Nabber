@@ -1,13 +1,39 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import BottomBar from "./components/CommonComponent/BottomBar";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import LoginScreen from "./components/Login-WelcomeScreen/LoginScreen/LoginScreen";
+import WelcomePage from "./components/Login-WelcomeScreen/WelcomeScreen/WelcomePage";
+import AuthStack from "./components/Login-WelcomeScreen/AuthStack";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
-    return (
-        <View style={styles.bottomBar}>
-            <BottomBar />
-        </View>
-    );
+    const [isLoading, setIsLoading] = useState(true);
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+        let idTimeOut = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+    }, []);
+
+    if (!isLogin)
+        return (
+            <NavigationContainer>
+                <AuthStack />
+            </NavigationContainer>
+        );
+
+    if (isLoading) {
+        return <LoadingScreen />;
+    } else {
+        return (
+            <View style={styles.bottomBar}>
+                <BottomBar />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

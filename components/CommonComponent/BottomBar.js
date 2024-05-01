@@ -1,8 +1,6 @@
 // Libraries
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { LinearGradient } from "expo-linear-gradient";
 
 // Components
 import HomePage from "../HomeScreen/HomePage";
@@ -10,28 +8,26 @@ import SearchPage from "../SearchScreen/SearchPage";
 import AddStoryPage from "../AddStoryScreen/AddStoryPage";
 import NotifyPage from "../NotifyScreen/NotifyPage.js";
 import ProfilePage from "../ProfileScreen/ProfilePage";
-import { StyleSheet, View } from "react-native";
+import {StyleSheet, View} from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomBar() {
     return (
-        <NavigationContainer>
-            <Tab.Navigator screenOptions={changeAppearance}>
-                <Tab.Screen name="Home" component={HomePage} />
-                <Tab.Screen name="Search" component={SearchPage} />
-                <Tab.Screen name="Add story" component={AddStoryPage} />
-                <Tab.Screen name="Notify" component={NotifyPage} />
-                <Tab.Screen name="Profile" component={ProfilePage} />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <Tab.Navigator screenOptions={changeAppearance}>
+            <Tab.Screen name="Home" component={HomePage}/>
+            <Tab.Screen name="Search" component={SearchPage}/>
+            <Tab.Screen name="Add story" component={AddStoryPage}/>
+            <Tab.Screen name="Notify" component={NotifyPage}/>
+            <Tab.Screen name="Profile" component={ProfilePage}/>
+        </Tab.Navigator>
     );
 }
 
-const changeAppearance = function ({ route }) {
+const changeAppearance = function ({route}) {
     return {
         tabBarShowLabel: false,
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({focused, color, size}) => {
             let iconName;
             let iconComponent;
             switch (route.name) {
@@ -45,7 +41,7 @@ const changeAppearance = function ({ route }) {
                     iconName = focused ? "add" : "add-outline";
                     iconComponent = (
                         <View style={styles.circleContainer}>
-                            <Ionicons name={iconName} color={"#fff"} size={size} />
+                            <Ionicons name={iconName} color={"#fff"} size={size}/>
                         </View>
                     );
                     break;
@@ -57,7 +53,7 @@ const changeAppearance = function ({ route }) {
                     break;
             }
 
-            return iconComponent || <Ionicons name={iconName} color={color} size={size} />;
+            return iconComponent || <Ionicons name={iconName} color={color} size={size}/>;
         },
         tabBarStyle: {
             height: 96,

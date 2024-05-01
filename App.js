@@ -7,6 +7,7 @@ import LoginScreen from "./components/Login-WelcomeScreen/LoginScreen/LoginScree
 import WelcomePage from "./components/Login-WelcomeScreen/WelcomeScreen/WelcomePage";
 import AuthStack from "./components/Login-WelcomeScreen/AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
+import MainApp from "./components/MainApp";
 
 export default function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -28,11 +29,7 @@ export default function App() {
     if (isLoading) {
         return <LoadingScreen />;
     } else {
-        return (
-            <View style={styles.bottomBar}>
-                <BottomBar />
-            </View>
-        );
+        return <MainApp />
     }
 }
 

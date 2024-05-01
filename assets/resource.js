@@ -8,4 +8,8 @@ const welcomePage = {
     thirdWelcomePage: require("./welcome-page/3e3f614908f0081a5b6013fed86e4835.jpg")
 }
 
-export { logo, demoPicture, faviconPicture, welcomePage };
+const loginPage = {
+    headingImage: require("./sign-in-page/Frame 4.png")
+}
+
+export { logo, demoPicture, faviconPicture, welcomePage, loginPage };

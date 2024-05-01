@@ -13,9 +13,9 @@ export default function InteractiveBar() {
     return (
         <View style={style.container}>
             <InteractiveIcon iconName={isLoveClicked ? "heart" : "heart-outline"} numberInteractive={4923} color={isLoveClicked ? "red" : "black"} onPress={changeColorIcon} />
-            <Divider width={"1"} height={"100%"} borderLeftWidth={1}/>
+            <Divider width={"1"} height={"100%"} borderLeftWidth={1} marginHorizontal={14}/>
             <InteractiveIcon iconName={"chatbox-outline"} numberInteractive={4923} />
-            <Divider width={1} height={"100%"} borderLeftWidth={1}/>
+            <Divider width={1} height={"100%"} borderLeftWidth={1} marginHorizontal={14}/>
             <InteractiveIcon iconName={"arrow-redo-outline"} numberInteractive={4923} />
         </View>
     );

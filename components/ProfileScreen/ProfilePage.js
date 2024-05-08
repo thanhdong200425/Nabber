@@ -7,12 +7,14 @@ import ProfileStatsLine from "./ProfileStatsLine";
 import ShortDescription from "./ShortDescrip";
 import SavedPostContainer from "./post/SavedPostContainer";
 
-export default function ProfilePage() {
+export default function ProfilePage({route}) {
+    const {user} = route.params;
+    console.log(user);
     return (
         <View style={styles.container}>
-            <CoverImage imageSrc={demoPicture} />
+            <CoverImage imageSrc={{uri: user.coverImage}} />
             <View style={styles.containerAvatar}>
-                <Avatar imageSrc={{ uri: "https://picsum.photos/id/235/200/300" }} avatarFullName={"Thanh Dong"} avatarUserName={"@tdong_07"} />
+                <Avatar imageSrc={{ uri: user.image }} avatarFullName={user.givenName} avatarUserName={user.username} />
             </View>
             <ScrollView style={styles.scrollViewContainer}>
                 <ProfileStatsLine />

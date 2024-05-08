@@ -13,7 +13,7 @@ export default function SignUpScreen({navigation}) {
     const [passwordInputField, setPasswordInputField] = useState("");
     const [retypePasswordInputField, setRetypePasswordInputField] = useState("");
     const [nameInputField, setNameInputField] = useState("");
-    const baseUrl = "http://192.168.1.128:3000/";
+    const baseUrl = "http://192.168.95.250:3000/"
 
     function checkInput(inputValue) {
         if (inputValue !== "") return true;
@@ -38,12 +38,13 @@ export default function SignUpScreen({navigation}) {
                     })
 
                     const status = makeRequest.status;
+                    const response = await makeRequest.json();
                     if (status !== 200) {
-                        const response = await makeRequest.json();
                         console.log(response.message);
                         setError(response.message);
                     } else {
-                        navigation.navigate('MainApp');
+                        const user = response.data;
+                        navigation.navigate('MainApp', {user: user});
 
                     }
 

@@ -6,11 +6,12 @@ import { useState } from "react";
 import ButtonSubmit from "./LoginComponent/ButtonSubmit";
 import OptionsLogin from "./LoginComponent/OptionsLogin";
 import Divider from "../../CommonComponent/Divider";
+
 export default function LoginScreen({ navigation }) {
     const [emailInputField, setEmailInputField] = useState("");
     const [passwordInputField, setPasswordInputField] = useState("");
     const [error, setError] = useState("");
-    const baseUrl = "http://192.168.1.128:3000/";
+    const baseUrl = "http://192.168.95.250:3000/"
 
     function checkInput(inputValue) {
         if (inputValue !== "") return true;
@@ -32,7 +33,7 @@ export default function LoginScreen({ navigation }) {
                 const returnData = await response.json();
                 if (response.ok) {
                     setError("");
-                    navigation.navigate("MainApp");
+                    navigation.navigate("MainApp", {user: returnData.data});
                 } else {
                     setError(returnData.message);
                 }

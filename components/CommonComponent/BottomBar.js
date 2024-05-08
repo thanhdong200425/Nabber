@@ -12,14 +12,15 @@ import {StyleSheet, View} from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomBar() {
+export default function BottomBar({user}) {
+
     return (
         <Tab.Navigator screenOptions={changeAppearance}>
             <Tab.Screen name="Home" component={HomePage}/>
             <Tab.Screen name="Search" component={SearchPage}/>
             <Tab.Screen name="Add story" component={AddStoryPage}/>
             <Tab.Screen name="Notify" component={NotifyPage}/>
-            <Tab.Screen name="Profile" component={ProfilePage}/>
+            <Tab.Screen name="Profile" component={ProfilePage} initialParams={{user: user}}/>
         </Tab.Navigator>
     );
 }

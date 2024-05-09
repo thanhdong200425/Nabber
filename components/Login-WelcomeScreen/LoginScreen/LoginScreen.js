@@ -11,7 +11,7 @@ export default function LoginScreen({ navigation }) {
     const [emailInputField, setEmailInputField] = useState("");
     const [passwordInputField, setPasswordInputField] = useState("");
     const [error, setError] = useState("");
-    const baseUrl = "http://192.168.95.250:3000/"
+    const baseUrl = "http://192.168.1.85:3000/"
 
     function checkInput(inputValue) {
         if (inputValue !== "") return true;

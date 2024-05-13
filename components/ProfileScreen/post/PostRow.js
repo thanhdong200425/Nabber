@@ -4,7 +4,7 @@ import PostSmall from "./PostSmall";
 
 export default function PostRow(props) {
     let layout = props.layout;
-    let childElement = layout == "1-2" ? layoutFirst : layoutSecond;
+    let childElement = layout === "1-2" ? layoutFirst : layoutSecond;
 
     return childElement(props);
 }

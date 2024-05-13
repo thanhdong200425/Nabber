@@ -1,5 +1,5 @@
 // Libraries
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Components
@@ -8,27 +8,26 @@ import SearchPage from "../SearchScreen/SearchPage";
 import AddStoryPage from "../AddStoryScreen/AddStoryPage";
 import NotifyPage from "../NotifyScreen/NotifyPage.js";
 import ProfilePage from "../ProfileScreen/ProfilePage";
-import {StyleSheet, View} from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomBar({user}) {
-
+export default function BottomBar({ user }) {
     return (
         <Tab.Navigator screenOptions={changeAppearance}>
-            <Tab.Screen name="Home" component={HomePage}/>
-            <Tab.Screen name="Search" component={SearchPage}/>
-            <Tab.Screen name="Add story" component={AddStoryPage}/>
-            <Tab.Screen name="Notify" component={NotifyPage}/>
-            <Tab.Screen name="Profile" component={ProfilePage} initialParams={{user: user}}/>
+            <Tab.Screen name="Home" component={HomePage} initialParams={{ user: user }} />
+            <Tab.Screen name="Search" component={SearchPage} />
+            <Tab.Screen name="Add story" component={AddStoryPage} />
+            <Tab.Screen name="Notify" component={NotifyPage} />
+            <Tab.Screen name="Profile" component={ProfilePage} initialParams={{ user: user }} />
         </Tab.Navigator>
     );
 }
 
-const changeAppearance = function ({route}) {
+const changeAppearance = function ({ route }) {
     return {
         tabBarShowLabel: false,
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             let iconComponent;
             switch (route.name) {
@@ -42,7 +41,7 @@ const changeAppearance = function ({route}) {
                     iconName = focused ? "add" : "add-outline";
                     iconComponent = (
                         <View style={styles.circleContainer}>
-                            <Ionicons name={iconName} color={"#fff"} size={size}/>
+                            <Ionicons name={iconName} color={"#fff"} size={size} />
                         </View>
                     );
                     break;
@@ -54,7 +53,7 @@ const changeAppearance = function ({route}) {
                     break;
             }
 
-            return iconComponent || <Ionicons name={iconName} color={color} size={size}/>;
+            return iconComponent || <Ionicons name={iconName} color={color} size={size} />;
         },
         tabBarStyle: {
             height: 96,

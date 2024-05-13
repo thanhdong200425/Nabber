@@ -6,7 +6,8 @@ import SubHeader from "./SubHeader";
 import { logo } from "../../assets/resource";
 import ContainerPosts from "./ContainerPosts";
 
-export default function HomePage() {
+export default function HomePage({route}) {
+    const {user} = route.params;
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />

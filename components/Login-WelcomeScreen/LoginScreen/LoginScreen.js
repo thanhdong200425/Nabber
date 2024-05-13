@@ -6,12 +6,12 @@ import { useState } from "react";
 import ButtonSubmit from "./LoginComponent/ButtonSubmit";
 import OptionsLogin from "./LoginComponent/OptionsLogin";
 import Divider from "../../CommonComponent/Divider";
+import { saveToken } from "../../../helper_functions/handleToken";
 
 export default function LoginScreen({ navigation }) {
     const [emailInputField, setEmailInputField] = useState("");
     const [passwordInputField, setPasswordInputField] = useState("");
     const [error, setError] = useState("");
-    const baseUrl = "http://192.168.1.85:3000/"
 
     function checkInput(inputValue) {
         if (inputValue !== "") return true;
@@ -32,8 +32,9 @@ export default function LoginScreen({ navigation }) {
 
                 const returnData = await response.json();
                 if (response.ok) {
+                    await saveToken("loginToken", returnData.loginToken);
                     setError("");
-                    navigation.navigate("MainApp", {user: returnData.data});
+                    navigation.navigate("MainApp", { user: returnData.data });
                 } else {
                     setError(returnData.message);
                 }
@@ -88,6 +89,8 @@ export default function LoginScreen({ navigation }) {
         </KeyboardAvoidingView>
     );
 }
+
+export const baseUrl = "http://192.168.95.250:3000/";
 
 const styles = StyleSheet.create({
     container: {

@@ -17,7 +17,7 @@ export default function BottomBar({ user }) {
         <Tab.Navigator screenOptions={changeAppearance}>
             <Tab.Screen name="Home" component={HomePage} initialParams={{ user: user }} />
             <Tab.Screen name="Search" component={SearchPage} />
-            <Tab.Screen name="Add story" component={AddStoryPage} />
+            <Tab.Screen name="Add story" component={AddStoryPage} options={{ tabBarStyle: { display: "none" } }} />
             <Tab.Screen name="Notify" component={NotifyPage} />
             <Tab.Screen name="Profile" component={ProfilePage} initialParams={{ user: user }} />
         </Tab.Navigator>

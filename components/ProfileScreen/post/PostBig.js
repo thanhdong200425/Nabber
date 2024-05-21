@@ -1,9 +1,9 @@
 import { Image, StyleSheet, View } from "react-native";
 
-export default function PostBig(props) {
+export default function PostBig({src, width = 180, height = 273}) {
     return (
         <View style={styles.container}>
-            <Image source={props.src} style={styles.image} />
+            <Image source={src} style={{...styles.image, width: width, height: height}} />
         </View>
     );
 }

@@ -32,7 +32,9 @@ export default function LoginScreen({ navigation }) {
 
                 const returnData = await response.json();
                 if (response.ok) {
+                    let data = `${returnData.data.id}`;
                     await saveToken("loginToken", returnData.loginToken);
+                    await saveToken("userId", returnData.data.id.toString());
                     setError("");
                     navigation.navigate("MainApp", { user: returnData.data });
                 } else {
@@ -90,7 +92,7 @@ export default function LoginScreen({ navigation }) {
     );
 }
 
-export const baseUrl = "http://192.168.95.250:3000/";
+export const baseUrl = "http://192.168.171.250:3000/";
 
 const styles = StyleSheet.create({
     container: {

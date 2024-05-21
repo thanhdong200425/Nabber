@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import BottomBar from "./components/CommonComponent/BottomBar";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import LoginScreen from "./components/Login-WelcomeScreen/LoginScreen/LoginScreen";
 import WelcomePage from "./components/Login-WelcomeScreen/WelcomeScreen/WelcomePage";
@@ -12,7 +12,6 @@ import MainApp from "./components/MainApp";
 export default function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [isLogin, setIsLogin] = useState(false);
-
     useEffect(() => {
         let idTimeOut = setTimeout(() => {
             setIsLoading(false);
@@ -29,7 +28,7 @@ export default function App() {
     if (isLoading) {
         return <LoadingScreen />;
     } else {
-        return <MainApp />
+        return <MainApp />;
     }
 }
 

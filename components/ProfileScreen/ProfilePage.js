@@ -9,7 +9,6 @@ import SavedPostContainer from "./post/SavedPostContainer";
 
 export default function ProfilePage({route}) {
     const {user} = route.params;
-    console.log(user)
     return (
         <View style={styles.container}>
             <CoverImage imageSrc={{uri: user.coverImage}} />

@@ -1,11 +1,11 @@
-import {StyleSheet, View} from "react-native";
+import { StyleSheet, View } from "react-native";
 import BottomBar from "./CommonComponent/BottomBar";
 
-export default function MainApp({route}) {
-    const {user} = route.params;
+export default function MainApp({ route }) {
+    const { user } = route.params;
     return (
         <View style={styles.bottomBar}>
-            <BottomBar user={user}/>
+            <BottomBar user={user} />
         </View>
     );
 }

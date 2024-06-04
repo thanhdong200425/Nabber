@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     previewContainer: {
-        flex: 1, // Take up available space
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
     },

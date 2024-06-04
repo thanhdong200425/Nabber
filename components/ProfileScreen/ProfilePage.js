@@ -7,11 +7,11 @@ import ProfileStatsLine from "./ProfileStatsLine";
 import ShortDescription from "./ShortDescrip";
 import SavedPostContainer from "./post/SavedPostContainer";
 
-export default function ProfilePage({route}) {
-    const {user} = route.params;
+export default function ProfilePage({ route }) {
+    const { user } = route.params;
     return (
         <View style={styles.container}>
-            <CoverImage imageSrc={{uri: user.coverImage}} />
+            <CoverImage imageSrc={{ uri: user.coverImage }} />
             <View style={styles.containerAvatar}>
                 <Avatar imageSrc={{ uri: user.image }} avatarFullName={user.givenName} avatarUserName={user.username} />
             </View>
@@ -27,6 +27,7 @@ export default function ProfilePage({route}) {
 const styles = StyleSheet.create({
     container: {
         height: "100%",
+        backgroundColor: "#fff"
     },
     containerAvatar: {
         marginTop: 60,

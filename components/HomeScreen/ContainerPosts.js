@@ -3,6 +3,7 @@ import Post from "./Posts/Post";
 import { useEffect, useState } from "react";
 import { baseUrl } from "../Login-WelcomeScreen/LoginScreen/LoginScreen";
 import { getToken } from "../../helper_functions/handleToken";
+import { timeDifference } from "../../helper_functions/handleTime";
 
 export default function ContainerPosts() {
     let data = [
@@ -46,6 +47,14 @@ export default function ContainerPosts() {
                 });
 
                 let result = await response.json();
+                // Add time difference for each post
+                result.posts.forEach((post) => {
+                    const postCreationTime = new Date(post.createdAt);
+                    post.timeAgo = timeDifference(new Date(), postCreationTime);
+                });
+
+                // Sort the array
+                result.posts = result.posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 return result.posts;
             } catch (error) {
                 console.log(error);
@@ -62,7 +71,7 @@ export default function ContainerPosts() {
             style={styles.container}
             data={newData}
             renderItem={({ item }) => {
-                return <Post imageSrc={{ uri: item.image }} content={item.content} personSrc={{ uri: item.userImage }} namePerson={`${item.givenName} ${item.givenSurname}`} locationPerson={item.country} timePost={data[0].timePost} />;
+                return <Post imageSrc={{ uri: item.image }} content={item.content} personSrc={{ uri: item.userImage }} namePerson={`${item.givenName} ${item.givenSurname ? item.givenSurname : ""}`} locationPerson={item.country} timePost={item.timeAgo} />;
             }}
             keyExtractor={(item, index) => index.toString()}
         />

@@ -4,11 +4,12 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Components
 import HomePage from "../HomeScreen/HomePage";
-import SearchPage from "../SearchScreen/SearchPage";
 import AddStoryPage from "../AddStoryScreen/AddStoryPage";
 import NotifyPage from "../NotifyScreen/NotifyPage.js";
 import ProfilePage from "../ProfileScreen/ProfilePage";
 import { StyleSheet, View } from "react-native";
+import SearchNavigation from "../SearchScreen/SearchNavigation";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +17,7 @@ export default function BottomBar({ user }) {
     return (
         <Tab.Navigator screenOptions={changeAppearance}>
             <Tab.Screen name="Home" component={HomePage} initialParams={{ user: user }} />
-            <Tab.Screen name="Search" component={SearchPage} />
+            <Tab.Screen name="Search" component={SearchNavigation} />
             <Tab.Screen name="Add story" component={AddStoryPage} options={{ tabBarStyle: { display: "none" } }} />
             <Tab.Screen name="Notify" component={NotifyPage} />
             <Tab.Screen name="Profile" component={ProfilePage} initialParams={{ user: user }} />
@@ -60,6 +61,7 @@ const changeAppearance = function ({ route }) {
         },
         tabBarActiveTintColor: "#E55733",
         headerShown: false,
+        tabBarHideOnKeyboard: true
     };
 };
 

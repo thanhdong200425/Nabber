@@ -23,7 +23,6 @@ const getToken = async (name) => {
 const deleteToken = async (name) => {
     try {
         await SecureStorage.deleteItemAsync(name);
-        console.log("Delete token successfully!");
     } catch (error) {
         console.log("Error when delete token: " + error);
     }

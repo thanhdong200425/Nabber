@@ -3,32 +3,41 @@ import PostBig from "./PostBig";
 import PostSmall from "./PostSmall";
 
 export default function PostRow(props) {
-    let layout = props.layout;
-    let childElement = layout === "1-2" ? layoutFirst : layoutSecond;
-
+    const layout = props.layout;
+    const childElement = layout === "1-2" ? layoutFirst : layoutSecond;
     return childElement(props);
 }
 
 const layoutFirst = function (props) {
+    const navigation = props.onPress,
+        user = props.user,
+        bigPostInfo = props.bigPostInfo,
+        firstSmallPostInfo = props.firstSmallPostInfo,
+        secondSmallPostInfo = props.secondSmallPostInfo;
     return (
         <View style={styles.rowContainer}>
-            <PostBig src={props.bigImageSrc} />
+            <PostBig src={props.bigImageSrc} navigation={() => navigation(bigPostInfo.image, user.image, user.givenName, user.country, bigPostInfo.createdAt, bigPostInfo.content)} />
             <View style={styles.postSmallContainer}>
-                <PostSmall src={props.firstSmallImageSrc} />
-                <PostSmall src={props.secondSmallImageSrc} />
+                <PostSmall src={props.firstSmallImageSrc} navigation={() => navigation(firstSmallPostInfo.image, user.image, user.givenName, user.country, firstSmallPostInfo.createdAt, firstSmallPostInfo.content)} />
+                <PostSmall src={props.secondSmallImageSrc} navigation={() => navigation(secondSmallPostInfo.image, user.image, user.givenName, user.country, secondSmallPostInfo.createdAt, secondSmallPostInfo.content)} />
             </View>
         </View>
     );
 };
 
 const layoutSecond = function (props) {
+    const navigation = props.onPress,
+        user = props.user,
+        bigPostInfo = props.bigPostInfo,
+        firstSmallPostInfo = props.firstSmallPostInfo,
+        secondSmallPostInfo = props.secondSmallPostInfo;
     return (
         <View style={styles.rowContainer}>
             <View style={styles.postSmallContainer}>
-                <PostSmall src={props.firstSmallImageSrc} />
-                <PostSmall src={props.secondSmallImageSrc} />
+                <PostSmall src={props.firstSmallImageSrc} navigation={() => navigation(firstSmallPostInfo.image, user.image, user.givenName, user.country, firstSmallPostInfo.createdAt, firstSmallPostInfo.content)} />
+                <PostSmall src={props.secondSmallImageSrc} navigation={() => navigation(secondSmallPostInfo.image, user.image, user.givenName, user.country, secondSmallPostInfo.createdAt, secondSmallPostInfo.content)} />
             </View>
-            <PostBig src={props.bigImageSrc} />
+            <PostBig src={props.bigImageSrc} navigation={() => navigation(bigPostInfo.image, user.image, user.givenName, user.country, bigPostInfo.createdAt, bigPostInfo.content)} />
         </View>
     );
 };

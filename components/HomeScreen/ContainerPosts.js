@@ -57,7 +57,7 @@ export default function ContainerPosts() {
                 result.posts = result.posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 return result.posts;
             } catch (error) {
-                console.log(error);
+                console.log("Error when get post of friends: " + error);
             }
         };
 

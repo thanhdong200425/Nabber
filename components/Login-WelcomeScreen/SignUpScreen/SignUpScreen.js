@@ -39,7 +39,6 @@ export default function SignUpScreen({ navigation }) {
                     const status = makeRequest.status;
                     const response = await makeRequest.json();
                     if (status !== 200) {
-                        console.log(response.message);
                         setError(response.message);
                     } else {
                         const user = response.data;

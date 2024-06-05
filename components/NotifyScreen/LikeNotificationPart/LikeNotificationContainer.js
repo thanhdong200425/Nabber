@@ -4,7 +4,6 @@ import Divider from "../../CommonComponent/Divider";
 
 export default function LikeNotificationContainer(props) {
     let data = props.dataSet;
-    console.log(data);
     return <View>
         <FlatList data={data} renderItem={({item}) => {
             return <View>

@@ -47,7 +47,6 @@ export default function AddStoryPage({ navigation }) {
                 });
                 if (fetchUserInfo.status === 200) {
                     const user = await fetchUserInfo.json();
-                    console.log(user.data);
                     navigation.push("MainApp", {
                         user: user.data,
                     });

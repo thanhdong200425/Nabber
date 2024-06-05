@@ -1,10 +1,10 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, TouchableOpacity } from "react-native";
 
 export default function PostSmall(props) {
     return (
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={props.navigation}>
             <Image source={props.src} style={styles.image} />
-        </View>
+        </TouchableOpacity>
     );
 }
 

@@ -8,7 +8,6 @@ export default function EmptyPart(props) {
     const setIsEmpty = props.setIsEmpty;
     const isEmpty = props.isEmpty;
     useEffect(() => {
-        console.log(resultFromSearch);
         if (resultFromSearch[0] === null) setIsEmpty("Find your contacts");
         else if (resultFromSearch.length === 0) setIsEmpty("Not found");
     }, [resultFromSearch]);

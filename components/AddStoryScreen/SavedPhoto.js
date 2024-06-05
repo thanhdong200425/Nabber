@@ -36,7 +36,7 @@ export default function SavedPhoto({ route, source }) {
             setImageUri(asset.uri);
             setIsImageLoading(false);
             setPickedEmoji(null);
-        } else console.log(null);
+        }
     };
 
     const contentAction = () => {

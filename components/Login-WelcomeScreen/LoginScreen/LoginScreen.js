@@ -41,7 +41,7 @@ export default function LoginScreen({ navigation }) {
                     setError(returnData.message);
                 }
             } catch (error) {
-                console.log(error.request);
+                console.log("Error when sign in" + error.request);
             }
         } else setError("Email or password is empty");
     }
@@ -92,7 +92,7 @@ export default function LoginScreen({ navigation }) {
     );
 }
 
-export const baseUrl = "http://172.28.176.1:3000/";
+export const baseUrl = "http://192.168.239.250:3000/";
 
 const styles = StyleSheet.create({
     container: {

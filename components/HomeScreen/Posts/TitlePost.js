@@ -1,19 +1,22 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import {Image, StyleSheet, Text, View} from "react-native";
 
 export default function TitlePost(props) {
+    const textColor = props.textColor ? {
+        color: props.textColor
+    } : {};
     return (
         <View style={styles.container}>
             {/* Left side */}
             <View style={styles.leftContainer}>
-                <Image source={props.src} style={styles.image} />
+                <Image source={props.src} style={styles.image}/>
                 <View style={styles.textLeftContainer}>
-                    <Text style={{ fontWeight: "700" }}>{props.namePerson}</Text>
-                    <Text style={{ fontWeight: "300" }}>{props.locationPerson}</Text>
+                    <Text style={{fontWeight: "700", ...textColor}}>{props.namePerson}</Text>
+                    <Text style={{fontWeight: "300", ...textColor}}>{props.locationPerson}</Text>
                 </View>
             </View>
             {/* Right side */}
             <View>
-                <Text style={{ fontWeight: "300" }}>{props.timePost}</Text>
+                <Text style={{fontWeight: "300", ...textColor}}>{props.timePost}</Text>
             </View>
         </View>
     );

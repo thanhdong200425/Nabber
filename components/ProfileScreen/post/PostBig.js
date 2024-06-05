@@ -1,10 +1,11 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function PostBig({src, width = 180, height = 273}) {
+export default function PostBig({ src, width = 180, height = 273, navigation }) {
     return (
-        <View style={styles.container}>
-            <Image source={src} style={{...styles.image, width: width, height: height}} />
-        </View>
+        <TouchableOpacity style={styles.container} onPress={navigation}>
+            <Image source={src} style={{ ...styles.image, width: width, height: height }} />
+        </TouchableOpacity>
     );
 }
 

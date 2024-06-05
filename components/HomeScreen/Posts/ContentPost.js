@@ -1,9 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ContentPost(props) {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const textColor = props.textColor
+        ? {
+              color: props.textColor,
+          }
+        : {};
+    const toggleText = () => {
+        setIsExpanded(!isExpanded);
+    };
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{props.content}</Text>
+            <Pressable onPress={toggleText}>
+                <Text style={{ ...styles.text, ...textColor }} numberOfLines={isExpanded ? 0 : 5} ellipsizeMode="tail">
+                    {props.content}
+                </Text>
+            </Pressable>
         </View>
     );
 }

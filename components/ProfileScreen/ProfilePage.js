@@ -6,15 +6,16 @@ import Avatar from "./Avatar";
 import ProfileStatsLine from "./ProfileStatsLine";
 import ShortDescription from "./ShortDescrip";
 import SavedPostContainer from "./post/SavedPostContainer";
+import { useContext } from "react";
+import { UserContext } from "./ProfileNavigation";
 
 export default function ProfilePage({ route }) {
-    const { user } = route.params;
-
+    const [user, setUser] = useContext(UserContext);
     return (
         <View style={styles.container}>
-            <CoverImage imageSrc={{ uri: user.coverImage }} />
+            <CoverImage imageSrc={user.coverImage} />
             <Pressable style={styles.containerAvatar}>
-                <Avatar imageSrc={{ uri: user.image }} avatarFullName={user.givenName} avatarUserName={user.username} />
+                <Avatar imageSrc={{ uri: user.image }} avatarFullName={user.givenName} avatarUserName={user.username} user={user} />
             </Pressable>
             <ScrollView style={styles.scrollViewContainer}>
                 <ProfileStatsLine />

@@ -1,12 +1,29 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Pressable } from "react-native";
 import Avatar from "./Avatar";
 import { demoPicture } from "../../assets/resource";
+import * as ImagePicker from "expo-image-picker";
+import { useState } from "react";
 
 export default function CoverImage(props) {
+    const [image, setImage] = useState(props.imageSrc);
+
+    const changePhoto = async () => {
+        const pickedPhoto = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [16, 9],
+            quality: 1,
+        });
+
+        if (!pickedPhoto.canceled) {
+            setImage(pickedPhoto.assets[0].uri);
+        }
+    };
+
     return (
-        <View style={styles.container}>
-            <Image source={props.imageSrc} style={styles.image} resizeMode="cover" />
-        </View>
+        <Pressable style={styles.container} onLongPress={changePhoto}>
+            <Image source={{ uri: image }} style={styles.image} resizeMode="cover" />
+        </Pressable>
     );
 }
 

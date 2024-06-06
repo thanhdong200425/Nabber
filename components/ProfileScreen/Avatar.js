@@ -6,10 +6,17 @@ import { useNavigation } from "@react-navigation/native";
 export default function Avatar(props) {
     const [isShowOptions, setIsShowOptions] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
+    const user = props.user;
     const navigation = useNavigation();
 
     const showOptions = () => {
         setIsShowOptions(!isShowOptions);
+    };
+
+    const editProfileFunction = () => {
+        navigation.push("EditProfilePage", {
+            user: user,
+        });
     };
 
     const signOutFunction = async () => {
@@ -33,7 +40,14 @@ export default function Avatar(props) {
             </Pressable>
             {isShowOptions && (
                 <View style={styles.dropdownContainer}>
-                    <Pressable style={{ ...styles.dropdownElement, backgroundColor: isPressed === 1 ? "#fff" : "#000" }} onPressIn={() => setIsPressed(1)} onPressOut={() => setIsPressed(false)}>
+                    <Pressable
+                        style={{ ...styles.dropdownElement, backgroundColor: isPressed === 1 ? "#fff" : "#000" }}
+                        onPressIn={() => setIsPressed(1)}
+                        onPressOut={() => {
+                            setIsPressed(false);
+                            editProfileFunction();
+                        }}
+                    >
                         <Text style={{ ...styles.dropdownText, color: isPressed === 1 ? "#000" : "#fff" }}>Edit profile</Text>
                     </Pressable>
                     <Pressable
@@ -85,7 +99,7 @@ const styles = StyleSheet.create({
     dropdownContainer: {
         position: "absolute",
         top: -105,
-        left: 280,
+        left: 250,
         backgroundColor: "#090909",
         padding: 5,
         borderRadius: 10,

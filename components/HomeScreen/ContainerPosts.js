@@ -71,7 +71,7 @@ export default function ContainerPosts() {
             style={styles.container}
             data={newData}
             renderItem={({ item }) => {
-                return <Post imageSrc={{ uri: item.image }} content={item.content} personSrc={{ uri: item.userImage }} namePerson={`${item.givenName} ${item.givenSurname ? item.givenSurname : ""}`} locationPerson={item.country} timePost={item.timeAgo} />;
+                return <Post postId={item.id} imageSrc={{ uri: item.image }} content={item.content} personSrc={{ uri: item.userImage }} namePerson={`${item.givenName} ${item.givenSurname ? item.givenSurname : ""}`} locationPerson={item.country} timePost={item.timeAgo} likeCount={item.likeCount} />;
             }}
             keyExtractor={(item, index) => index.toString()}
         />

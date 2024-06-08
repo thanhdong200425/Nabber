@@ -19,7 +19,7 @@ export default function ProfileSearchResult({ route }) {
     }, [id]);
     return (
         <View style={styles.container}>
-            <CoverImage imageSrc={{ uri: user.coverImage }} />
+            <CoverImage imageSrc={user.coverImage} />
             <View style={styles.containerAvatar}>
                 <Avatar imageSrc={{ uri: user.image }} avatarFullName={user.givenName} avatarUserName={user.username} />
             </View>

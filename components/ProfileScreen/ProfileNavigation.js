@@ -4,6 +4,7 @@ import ShowPostPage from "../ShowPostScreen/ShowPostPage";
 import BackButton from "../CommonComponent/BackButton";
 import EditProfilePage from "./DropDownScreen/EditProfilePage";
 import { createContext, useState } from "react";
+import ThreeDotButton from "../CommonComponent/ThreeDotButton";
 
 const Stack = createNativeStackNavigator();
 export const UserContext = createContext();
@@ -21,6 +22,7 @@ export default function ProfileNavigation({ route }) {
                         headerTitle: "",
                         headerStyle: { backgroundColor: "#CEC040" },
                         headerLeft: (props) => <BackButton {...props} onPress={navigation.goBack} />,
+                        headerRight: (props) => <ThreeDotButton onPress={() => console.log("Three dot")} />,
                         headerShadowVisible: false,
                     })}
                 />

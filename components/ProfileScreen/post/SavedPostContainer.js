@@ -12,18 +12,19 @@ export default function SavedPostContainer({ id = 0 }) {
     const [userData, setUserData] = useState({});
     const layouts = ["1-2", "2-1"];
     const navigate = useNavigation();
-    const navigation = (imageSrc, personSrc, namePerson, locationPerson, timePost, content) => {
-        let current = new Date(),
-            previous = new Date(timePost);
-
+    const navigation = (postId, imageSrc, personSrc, namePerson, locationPerson, timePost, content, likeCount) => {
+        let current = new Date();
+        let previous = new Date(timePost);
         timePost = timeDifference(current, previous);
         navigate.push("ShowPostPage", {
-            src: imageSrc,
+            postId: postId,
+            imageSrc: imageSrc,
             personSrc: personSrc,
             namePerson: namePerson,
             locationPerson: locationPerson,
             timePost: timePost,
             content: content,
+            likeCount: likeCount,
         });
     };
 
@@ -31,6 +32,7 @@ export default function SavedPostContainer({ id = 0 }) {
         const getPosts = async () => {
             try {
                 const loginToken = await getToken("loginToken");
+                // For search page
                 if (id !== 0) {
                     const response = await fetch(baseUrl + "post/specific-user/" + id, {
                         method: "GET",
@@ -42,7 +44,9 @@ export default function SavedPostContainer({ id = 0 }) {
                     let result = await response.json();
                     setUserData(result.user);
                     return result.groupArray;
-                } else {
+                }
+                // For profile page
+                else {
                     const response = await fetch(baseUrl + "post/", {
                         method: "GET",
                         headers: {
@@ -58,17 +62,16 @@ export default function SavedPostContainer({ id = 0 }) {
                 console.log("Error when fetching data in SavedPostContainer component: " + error);
             }
         };
-        console.log(userData);
+
         getPosts().then((value) => setData(value));
     }, []);
     return (
         <View style={styles.outsideContainer}>
             {Object.keys(data).map((key) => {
                 const group = data[key];
-
                 // Handle when an array contains one object
                 if (group.length === 1) {
-                    return <SinglePostRow key={key} imageSrc={{ uri: group[0].image }} onPress={() => navigation(group[0].image, userData.image, userData.givenName, userData.country, group[0].createdAt, group[0].content)} />;
+                    return <SinglePostRow key={key} imageSrc={{ uri: group[0].image }} onPress={() => navigation(group[0].id, group[0].image, userData.image, userData.givenName, userData.country, group[0].createdAt, group[0].content, group[0].likeCount)} />;
                 }
 
                 // Handle when an array contains two objects

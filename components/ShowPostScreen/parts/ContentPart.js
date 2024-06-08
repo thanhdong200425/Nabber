@@ -3,6 +3,7 @@ import TitlePost from "../../HomeScreen/Posts/TitlePost";
 import ContentPost from "../../HomeScreen/Posts/ContentPost";
 import InteractiveBar from "../../HomeScreen/Posts/InteractiveBar";
 import Divider from "../../CommonComponent/Divider";
+import { useState } from "react";
 
 export default function ContentPart(props) {
     return (
@@ -11,7 +12,7 @@ export default function ContentPart(props) {
             <Divider height={20} />
             <ContentPost textColor={"#fff"} content={props.content} />
             <Divider height={25} />
-            <InteractiveBar backgroundColor={"#fff"} />
+            <InteractiveBar backgroundColor={"#fff"} likeCount={props.likeCount} postId={props.postId} userId={props.userId} isLoveClicked={props.isLoveClicked} setLikeCount={props.setLikeCount} />
         </View>
     );
 }

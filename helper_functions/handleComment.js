@@ -48,3 +48,24 @@ export const addAComment = async (postId, content) => {
         console.log("Error in addAComment function: " + error);
     }
 };
+
+export const getAISummary = async (postId) => {
+    try {
+        const loginToken = await getToken("loginToken");
+        const fetchData = await fetch(baseUrl + "post/get-summary-comment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                logintoken: loginToken,
+            },
+            body: JSON.stringify({
+                postId: postId,
+            }),
+        });
+
+        const result = await fetchData.json();
+        return result.data;
+    } catch (error) {
+        console.log("Error in getAISummary function: " + error);
+    }
+};

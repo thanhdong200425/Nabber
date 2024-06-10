@@ -16,6 +16,7 @@ const signUpPage = {
     headingImage: require("./sign-up-page/rafiki.png"),
 };
 
-const backButton = require("./app/back-button-outline.svg")
+const backButton = require("./app/back-button-outline.svg");
+const aiAvatar = require("./ai-avatar.jpg");
 
-export {logo, demoPicture, faviconPicture, welcomePage, loginPage, signUpPage, backButton};
+export { logo, demoPicture, faviconPicture, welcomePage, loginPage, signUpPage, backButton, aiAvatar };

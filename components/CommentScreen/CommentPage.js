@@ -3,13 +3,15 @@ import { StyleSheet, View, ScrollView, KeyboardAvoidingView, Platform, Pressable
 import Comment from "./Comment";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import BottomInput from "./BottomInput";
-import { addAComment, getAllComments } from "../../helper_functions/handleComment";
+import { addAComment, getAISummary, getAllComments } from "../../helper_functions/handleComment";
 import { timeDifference } from "../../helper_functions/handleTime";
+import { aiAvatar } from "../../assets/resource";
 
 export default function CommentPage({ route }) {
     const [inputValue, setInputValue] = useState("");
     const [comments, setComments] = useState([]);
     const [isSendButtonClick, setIsSendButtonClick] = useState(false);
+    const [aiSummary, setAiSummary] = useState("");
     const postId = route.params.postId ? route.params.postId : "";
 
     const addComment = (content) => {
@@ -18,8 +20,15 @@ export default function CommentPage({ route }) {
     };
 
     useEffect(() => {
-        getAllComments(postId).then((value) => setComments(value));
-    }, [comments]);
+        getAISummary(postId).then((value) => setAiSummary(value));
+    }, [isSendButtonClick === true]);
+
+    useEffect(() => {
+        getAllComments(postId).then((value) => {
+            setComments(value);
+            setIsSendButtonClick(false);
+        });
+    }, [isSendButtonClick === true]);
 
     return (
         <View style={styles.outerContainer}>
@@ -29,12 +38,13 @@ export default function CommentPage({ route }) {
                 </View>
             )}
             <View style={{ flex: 1 }}>
+                {aiSummary && <Comment marginBottom={0} avatarSource={aiAvatar} username={"AI"} content={aiSummary} timePost={""} isShowReply={false} />}
                 <FlatList
                     contentContainerStyle={styles.scrollContent}
                     data={comments}
                     renderItem={({ item }) => {
                         let timePost = timeDifference(new Date(), new Date(item.createdAt));
-                        return <Comment avatarSource={item.image} username={item.username} content={item.content} timePost={timePost} />;
+                        return <Comment avatarSource={{ uri: item.image }} username={item.username} content={item.content} timePost={timePost} isShowReply={true} />;
                     }}
                 />
 

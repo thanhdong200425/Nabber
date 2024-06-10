@@ -1,24 +1,26 @@
 import { useState, useRef, useEffect } from "react";
 import { View, Image, StyleSheet, Text, useWindowDimensions, Pressable } from "react-native";
 
-export default function Comment({ avatarSource, username, content, timePost }) {
+export default function Comment({ marginBottom, avatarSource, username, content, timePost, isShowReply }) {
     return (
-        <View style={styles.container}>
+        <View style={{ ...styles.container, marginBottom: marginBottom }}>
             {/* Avatar part */}
             <View style={styles.avatarContainer}>
-                <Image source={{ uri: avatarSource }} style={styles.image} />
+                <Image source={avatarSource} style={styles.image} />
             </View>
 
             {/* Content part */}
             <View style={styles.contentContainer}>
-                <Text style={{ lineHeight: 18 }}>
+                <Text style={{ lineHeight: 18, letterSpacing: 0.5 }}>
                     <Text style={{ fontWeight: "700" }}>{username} </Text> {content}
                 </Text>
                 <View style={styles.infoContent}>
                     <Text>{timePost}</Text>
-                    <Pressable>
-                        <Text style={{ fontWeight: "600" }}>Reply</Text>
-                    </Pressable>
+                    {isShowReply && (
+                        <Pressable>
+                            <Text style={{ fontWeight: "600" }}>Reply</Text>
+                        </Pressable>
+                    )}
                 </View>
             </View>
         </View>

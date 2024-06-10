@@ -25,7 +25,7 @@ export default function ShowPostPage({ route }) {
         <ScrollView style={styles.container}>
             <ImagePart src={{ uri: info.imageSrc }} />
             <Divider height={25} />
-            <ContentPart personSrc={{ uri: info.personSrc }} namePerson={info.namePerson} locationPerson={info.locationPerson} timePost={info.timePost} content={info.content} likeCount={likeCount} isLoveClicked={isLoveClicked} setLikeCount={changeColorIcon} />
+            <ContentPart postId={info.postId} personSrc={{ uri: info.personSrc }} namePerson={info.namePerson} locationPerson={info.locationPerson} timePost={info.timePost} content={info.content} likeCount={likeCount} isLoveClicked={isLoveClicked} setLikeCount={changeColorIcon} />
         </ScrollView>
     );
 }

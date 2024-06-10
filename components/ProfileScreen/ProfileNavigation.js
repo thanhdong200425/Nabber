@@ -5,6 +5,7 @@ import BackButton from "../CommonComponent/BackButton";
 import EditProfilePage from "./DropDownScreen/EditProfilePage";
 import { createContext, useState } from "react";
 import ThreeDotButton from "../CommonComponent/ThreeDotButton";
+import CommentPage from "../CommentScreen/CommentPage";
 
 const Stack = createNativeStackNavigator();
 export const UserContext = createContext();
@@ -36,6 +37,17 @@ export default function ProfileNavigation({ route }) {
                         headerShadowVisible: false,
                         headerTitle: "Edit profile",
                         headerTitleStyle: { fontWeight: "700" },
+                    })}
+                />
+                <Stack.Screen
+                    name="CommentPage"
+                    component={CommentPage}
+                    options={({ navigation }) => ({
+                        headerLeft: (props) => <BackButton {...props} onPress={navigation.goBack} />,
+                        headerTitleAlign: "center",
+                        headerTitle: "Comment",
+                        headerTitleStyle: { fontSize: 18 },
+                        headerShadowVisible: false,
                     })}
                 />
             </Stack.Navigator>

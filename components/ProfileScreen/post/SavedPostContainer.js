@@ -67,22 +67,25 @@ export default function SavedPostContainer({ id = 0 }) {
     }, []);
     return (
         <View style={styles.outsideContainer}>
-            {Object.keys(data).map((key) => {
-                const group = data[key];
-                // Handle when an array contains one object
-                if (group.length === 1) {
-                    return <SinglePostRow key={key} imageSrc={{ uri: group[0].image }} onPress={() => navigation(group[0].id, group[0].image, userData.image, userData.givenName, userData.country, group[0].createdAt, group[0].content, group[0].likeCount)} />;
-                }
+            {data &&
+                Object.keys(data).map((key) => {
+                    const group = data[key] ? data[key] : null;
+                    // Handle when an array contains one object
+                    if (group[0] && group.length === 1) {
+                        return <SinglePostRow key={key} imageSrc={{ uri: group[0].image }} onPress={() => navigation(group[0].id, group[0].image, userData.image, userData.givenName, userData.country, group[0].createdAt, group[0].content, group[0].likeCount)} />;
+                    }
+                    // Handle when an array contains two objects
+                    if (group[0] && group[1] && group.length === 2) {
+                    }
+                    const bigPostInfo = group[0] ? group[0] : null;
+                    const firstSmallPostInfo = group[1] ? group[1] : null;
+                    const secondSmallPostInfo = group[2] ? group[2] : null;
+                    const firstImageSource = group[1] ? group[1].image : null;
+                    const secondImageSource = group[2] ? group[2].image : null;
+                    const layout = layouts[Math.floor(Math.random() * layouts.length)];
 
-                // Handle when an array contains two objects
-                if (group.length === 2) {
-                }
-                const firstImageSource = group[1] ? group[1].image : null;
-                const secondImageSource = group[2] ? group[2].image : null;
-                const layout = layouts[Math.floor(Math.random() * layouts.length)];
-
-                return <PostRow key={key} user={userData} onPress={navigation} layout={layout} bigPostInfo={group[0]} bigImageSrc={{ uri: group[0].image }} firstSmallPostInfo={group[1]} firstSmallImageSrc={{ uri: firstImageSource }} secondSmallPostInfo={group[2]} secondSmallImageSrc={{ uri: secondImageSource }} />;
-            })}
+                    return <PostRow key={key} user={userData} onPress={navigation} layout={layout} bigPostInfo={bigPostInfo} bigImageSrc={{ uri: bigPostInfo.image }} firstSmallPostInfo={firstSmallPostInfo} firstSmallImageSrc={{ uri: firstImageSource }} secondSmallPostInfo={secondSmallPostInfo} secondSmallImageSrc={{ uri: secondImageSource }} />;
+                })}
         </View>
     );
 }

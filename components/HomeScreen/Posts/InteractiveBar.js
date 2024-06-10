@@ -18,7 +18,7 @@ export default function InteractiveBar(props) {
         <View style={{ ...style.container, ...backgroundColor }}>
             <InteractiveIcon iconName={props.isLoveClicked ? "heart" : "heart-outline"} numberInteractive={props.likeCount} color={props.isLoveClicked ? "red" : "black"} onPress={props.setLikeCount} />
             <Divider width={"1"} height={"100%"} borderLeftWidth={1} marginHorizontal={14} />
-            <InteractiveIcon iconName={"chatbox-outline"} numberInteractive={4923} />
+            <InteractiveIcon iconName={"chatbox-outline"} numberInteractive={4923} onPress={props.openCommentPage} />
             <Divider width={1} height={"100%"} borderLeftWidth={1} marginHorizontal={14} />
             <InteractiveIcon iconName={"arrow-redo-outline"} numberInteractive={4923} />
         </View>

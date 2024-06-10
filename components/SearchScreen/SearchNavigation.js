@@ -7,6 +7,7 @@ import ProfileSearchResult from "./ProfileSearchResult";
 import { backButton } from "../../assets/resource";
 import BackButton from "../CommonComponent/BackButton";
 import ShowPostPage from "../ShowPostScreen/ShowPostPage";
+import CommentPage from "../CommentScreen/CommentPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,17 @@ export default function SearchNavigation() {
                     headerTitle: "",
                     headerStyle: { backgroundColor: "#CEC040" },
                     headerLeft: (props) => <BackButton {...props} onPress={navigation.goBack} />,
+                    headerShadowVisible: false,
+                })}
+            />
+            <Stack.Screen
+                name="CommentPage"
+                component={CommentPage}
+                options={({ navigation }) => ({
+                    headerLeft: (props) => <BackButton {...props} onPress={navigation.goBack} />,
+                    headerTitleAlign: "center",
+                    headerTitle: "Comment",
+                    headerTitleStyle: { fontSize: 18 },
                     headerShadowVisible: false,
                 })}
             />

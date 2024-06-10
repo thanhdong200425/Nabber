@@ -1,6 +1,6 @@
 // Libraries
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {getFocusedRouteNameFromRoute} from "@react-navigation/native";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // Components
@@ -11,20 +11,20 @@ import ProfilePage from "../ProfileScreen/ProfilePage";
 import { StyleSheet, View } from "react-native";
 import SearchNavigation from "../SearchScreen/SearchNavigation";
 import ProfileNavigation from "../ProfileScreen/ProfileNavigation";
-
+import HomePageNavigation from "../HomeScreen/HomePageNavigation.js";
 
 const Tab = createBottomTabNavigator();
 
 const getTabBarVisibility = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route);
-    if (routeName === 'ShowPostPage') return "none";
+    if (routeName === "ShowPostPage" || routeName === "CommentPage") return "none";
     return "flex";
-}
+};
 
 export default function BottomBar({ user }) {
     return (
         <Tab.Navigator screenOptions={changeAppearance}>
-            <Tab.Screen name="Home" component={HomePage} initialParams={{ user: user }} />
+            <Tab.Screen name="Home" component={HomePageNavigation} initialParams={{ user: user }} />
             <Tab.Screen name="Search" component={SearchNavigation} />
             <Tab.Screen name="Add story" component={AddStoryPage} options={{ tabBarStyle: { display: "none" } }} />
             <Tab.Screen name="Notify" component={NotifyPage} />

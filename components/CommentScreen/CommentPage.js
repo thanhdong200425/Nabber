@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, ScrollView, KeyboardAvoidingView, Platform, Pressable, TextInput, FlatList, Text } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { StyleSheet, View, KeyboardAvoidingView, Platform, FlatList, Text } from "react-native";
 import Comment from "./Comment";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import BottomInput from "./BottomInput";
 import { addAComment, getAISummary, getAllComments } from "../../helper_functions/handleComment";
 import { timeDifference } from "../../helper_functions/handleTime";
 import { aiAvatar } from "../../assets/resource";
+import { BadgeContext } from "../CommonComponent/BottomBar";
 
 export default function CommentPage({ route }) {
     const [inputValue, setInputValue] = useState("");
     const [comments, setComments] = useState([]);
     const [isSendButtonClick, setIsSendButtonClick] = useState(false);
     const [aiSummary, setAiSummary] = useState("");
+    const [badgeCount, setBadgeCount] = useContext(BadgeContext);
     const postId = route.params.postId ? route.params.postId : "";
 
     const addComment = (content) => {
         addAComment(postId, content);
+        setBadgeCount((prev) => prev + 1);
         getAllComments(postId).then((value) => setComments(value));
     };
 

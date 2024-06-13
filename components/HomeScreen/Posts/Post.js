@@ -13,7 +13,6 @@ export default function Post(props) {
     const postId = props.postId;
     const ownUserId = props.ownUserId;
     const [isLoveClicked, setIsLoveClicked] = useState(false);
-    const [isExistNotification, setIsExistNotification] = useState(false);
     const [likeCount, setLikeCount] = useState(props.likeCount);
     const navigation = useNavigation();
     const [badgeCount, setBadgeCount] = useContext(BadgeContext);

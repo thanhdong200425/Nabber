@@ -1,34 +1,46 @@
-import {Image, Pressable, StyleSheet, Text, View} from "react-native";
+import { useContext } from "react";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { BadgeContext } from "../../CommonComponent/BottomBar";
 
 export default function LikeNotification(props) {
-    return <View style={styles.container}>
-        <View style={styles.insideContainer}>
-            <View style={styles.contentContainer}>
-                {/*Image part*/}
-                <Image source={props.src} width={32} height={32} style={styles.image}/>
+    const [badgeCount, setBadgeCount] = useContext(BadgeContext);
+    return (
+        <TouchableOpacity
+            style={styles.container}
+            onPress={() => {
+                if (badgeCount > 0) setBadgeCount(badgeCount - 1);
+            }}
+        >
+            <View style={styles.insideContainer}>
+                <View style={styles.contentContainer}>
+                    {/*Image part*/}
+                    <Image source={props.src} width={32} height={32} style={styles.image} />
 
-                {/*Content part*/}
-                <View style={styles.textContainer}>
-                    <Text style={styles.textUserName}>{props.username}</Text>
-                    <Text>{props.content} <Text style={styles.timePost}>{props.timePost}</Text></Text>
+                    {/*Content part*/}
+                    <View style={styles.textContainer}>
+                        <Text style={styles.textUserName}>{props.username}</Text>
+                        <Text>
+                            {props.content + " "} <Text style={styles.timePost}>{props.timePost}</Text>
+                        </Text>
+                    </View>
                 </View>
-            </View>
 
-            {/*Button part*/}
-            <Image source={props.postImageSrc} style={styles.postImage}/>
-        </View>
-    </View>
+                {/*Button part*/}
+                <Image source={props.postImageSrc} style={styles.postImage} />
+            </View>
+        </TouchableOpacity>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        marginVertical: 3
+        marginVertical: 3,
     },
     insideContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
     },
     contentContainer: {
         flexDirection: "row",
@@ -40,14 +52,14 @@ const styles = StyleSheet.create({
         marginEnd: 9,
     },
     timePost: {
-        color: "#9E9E9E"
+        color: "#9E9E9E",
     },
     textUserName: {
-        fontWeight: "700"
+        fontWeight: "700",
     },
     postImage: {
         width: 52,
         height: 52,
-        borderRadius: 4
-    }
-})
+        borderRadius: 4,
+    },
+});

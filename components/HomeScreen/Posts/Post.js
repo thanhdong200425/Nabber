@@ -3,15 +3,20 @@ import TitlePost from "./TitlePost";
 import ImagePost from "./ImagePost";
 import ContentPost from "./ContentPost";
 import InteractiveBar from "./InteractiveBar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { checkLoveClick, getLikeQuantity, toggleALike } from "../../../helper_functions/handleLike";
 import { useNavigation } from "@react-navigation/native";
+import { BadgeContext } from "../../CommonComponent/BottomBar";
+import { isExistingNotification } from "../../../helper_functions/handleNotification";
 
 export default function Post(props) {
     const postId = props.postId;
+    const ownUserId = props.ownUserId;
     const [isLoveClicked, setIsLoveClicked] = useState(false);
+    const [isExistNotification, setIsExistNotification] = useState(false);
     const [likeCount, setLikeCount] = useState(props.likeCount);
     const navigation = useNavigation();
+    const [badgeCount, setBadgeCount] = useContext(BadgeContext);
 
     useEffect(() => {
         checkLoveClick(postId).then((value) => setIsLoveClicked(value));
@@ -21,6 +26,11 @@ export default function Post(props) {
     const changeColorIcon = () => {
         setIsLoveClicked(!isLoveClicked);
         toggleALike(postId).then((value) => setLikeCount(value));
+        let addBadge = setTimeout(() => {
+            if (isLoveClicked !== true) {
+                setBadgeCount((prevValue) => prevValue + 1);
+            }
+        }, 2000);
     };
 
     const openCommentPage = () => {

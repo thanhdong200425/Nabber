@@ -92,7 +92,7 @@ export default function LoginScreen({ navigation }) {
     );
 }
 
-export const baseUrl = "http://192.168.9.250:3000/";
+export const baseUrl = "http://192.168.248.250:3000/";
 
 const styles = StyleSheet.create({
     container: {

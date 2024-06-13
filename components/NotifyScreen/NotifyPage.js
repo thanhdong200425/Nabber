@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import SearchBar from "../CommonComponent/SearchBar";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FollowNotification from "./FollowNotificationPart/FollowNotification";
 import FollowNotificationHeading from "./FollowNotificationPart/FollowNotificationHeading";
 import AllNotificationHeading from "./AllNotificationPart/AllNotificationHeading";
@@ -8,19 +8,27 @@ import LikeNotificationHeading from "./LikeNotificationPart/LikeNotificationHead
 import AllNotificationContainer from "./AllNotificationPart/AllNotificationContainer";
 import FollowNotificationContainer from "./FollowNotificationPart/FollowNotificationContainer";
 import LikeNotificationContainer from "./LikeNotificationPart/LikeNotificationContainer";
+import { getAllNotifications } from "../../helper_functions/handleNotification";
+import { BadgeContext } from "../CommonComponent/BottomBar";
 
 export default function NotifyPage() {
     const [selectedContainer, setSelectedContainer] = useState("all");
+    const [notification, setNotification] = useState({});
+    const [badgeCount, setBadgeCount] = useContext(BadgeContext);
+    useEffect(() => {
+        getAllNotifications().then((result) => setNotification(result));
+    }, [badgeCount]);
+
     let displayContainer;
     switch (selectedContainer) {
         case "all":
-            displayContainer = <AllNotificationContainer dataSet={allNotifications} />;
+            displayContainer = <AllNotificationContainer dataSet={notification} />;
             break;
         case "follow":
             displayContainer = <FollowNotificationContainer dataSet={dataSet.followNotifications} />;
             break;
         case "like":
-            displayContainer = <LikeNotificationContainer dataSet={dataSet.likeNotifications} />;
+            displayContainer = <LikeNotificationContainer dataSet={notification} />;
             break;
     }
 
@@ -61,9 +69,10 @@ export default function NotifyPage() {
 
 const styles = StyleSheet.create({
     outsideContainer: {
-        marginTop: 15,
+        paddingTop: 15,
         paddingHorizontal: 7,
         flex: 1,
+        backgroundColor: "#fff",
     },
     notifyContainer: {
         flexDirection: "row",

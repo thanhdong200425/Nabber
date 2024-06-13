@@ -12,8 +12,11 @@ import { StyleSheet, View } from "react-native";
 import SearchNavigation from "../SearchScreen/SearchNavigation";
 import ProfileNavigation from "../ProfileScreen/ProfileNavigation";
 import HomePageNavigation from "../HomeScreen/HomePageNavigation.js";
+import { createContext, useState } from "react";
 
 const Tab = createBottomTabNavigator();
+
+export const BadgeContext = createContext();
 
 const getTabBarVisibility = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route);
@@ -22,14 +25,28 @@ const getTabBarVisibility = (route) => {
 };
 
 export default function BottomBar({ user }) {
+    const [badgeCount, setBadgeCount] = useState(0);
     return (
-        <Tab.Navigator screenOptions={changeAppearance}>
-            <Tab.Screen name="Home" component={HomePageNavigation} initialParams={{ user: user }} />
-            <Tab.Screen name="Search" component={SearchNavigation} />
-            <Tab.Screen name="Add story" component={AddStoryPage} options={{ tabBarStyle: { display: "none" } }} />
-            <Tab.Screen name="Notify" component={NotifyPage} />
-            <Tab.Screen name="Profile" component={ProfileNavigation} initialParams={{ user: user }} />
-        </Tab.Navigator>
+        <BadgeContext.Provider value={[badgeCount, setBadgeCount]}>
+            <Tab.Navigator screenOptions={changeAppearance}>
+                <Tab.Screen name="Home" component={HomePageNavigation} initialParams={{ user: user }} />
+                <Tab.Screen name="Search" component={SearchNavigation} />
+                <Tab.Screen name="Add story" component={AddStoryPage} options={{ tabBarStyle: { display: "none" } }} />
+                <Tab.Screen
+                    name="Notify"
+                    component={NotifyPage}
+                    options={
+                        badgeCount != 0 && {
+                            tabBarBadge: badgeCount,
+                            tabBarBadgeStyle: {
+                                marginTop: 20,
+                            },
+                        }
+                    }
+                />
+                <Tab.Screen name="Profile" component={ProfileNavigation} initialParams={{ user: user }} />
+            </Tab.Navigator>
+        </BadgeContext.Provider>
     );
 }
 

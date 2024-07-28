@@ -1,13 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import BottomBar from "./components/CommonComponent/BottomBar";
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
-import LoginScreen from "./components/Login-WelcomeScreen/LoginScreen/LoginScreen";
-import WelcomePage from "./components/Login-WelcomeScreen/WelcomeScreen/WelcomePage";
 import AuthStack from "./components/Login-WelcomeScreen/AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
 import MainApp from "./components/MainApp";
+import { getToken } from "./helper_functions/handleToken";
+import LoginScreen from "./components/Login-WelcomeScreen/LoginScreen/LoginScreen";
 
 export default function App() {
     const [isLoading, setIsLoading] = useState(true);
@@ -16,19 +14,29 @@ export default function App() {
         let idTimeOut = setTimeout(() => {
             setIsLoading(false);
         }, 2000);
+
+        let checkLoginStatus = async () => {
+            try {
+                const loginStatus = await getToken("isAuthenticated");
+                console.log("Login status: " + loginStatus);
+                if (loginStatus == "true") {
+                    setIsLoading(false);
+                    setIsLogin(true);
+                }
+            } catch (error) {
+                console.log("Error when check login status at App component: " + error);
+            }
+        };
+
+        checkLoginStatus();
     }, []);
 
-    if (!isLogin)
+    if (isLogin) {
         return (
             <NavigationContainer>
-                <AuthStack />
+                <LoginScreen />
             </NavigationContainer>
         );
-
-    if (isLoading) {
-        return <LoadingScreen />;
-    } else {
-        return <MainApp />;
     }
 }
 
